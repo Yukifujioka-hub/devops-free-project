@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  web:
+    image: devops-free:latest
+    build: .
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
