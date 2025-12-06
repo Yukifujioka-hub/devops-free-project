@@ -1,15 +1,15 @@
-name: CI Pipeline
+name: CI Pipeline (tests + docker)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  build:
+  test_and_build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Checkout code
@@ -18,20 +18,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install dependencies (CI)
         run: |
           python -m pip install --upgrade pip
-          # requirements.txt があればそれを使う（なければ flask を入れる）
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install flask pytest; fi
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest
 
-      - name: Run tests
+      - name: Run pytest (on runner)
         run: |
-          # テストがあれば実行（例: pytest）
-          if [ -f pytest.ini ] || [ -d tests ]; then pytest -q || (echo "pytest failed" && exit 1); else echo "no tests found"; fi
+          pytest -v
 
-      - name: Prepare Docker buildx (recommended)
+      - name: Prepare Docker buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Docker build
@@ -40,18 +39,18 @@ jobs:
 
       - name: Cleanup old container if exists
         run: |
-          docker rm -f app || true
+          docker rm -f devops-ci || true
 
-      - name: Start container
+      - name: Start container for healthcheck
         run: |
-          docker run -d --name app -p 5001:5001 devops-free:ci
+          docker run -d --name devops-ci -p 5001:5001 devops-free:ci
           sleep 5
 
       - name: Health check
         run: |
-          curl -f http://localhost:5001 || (docker logs app && exit 1)
+          curl -f http://localhost:5001 || (docker logs devops-ci && exit 1)
 
       - name: Stop & remove container
         if: always()
         run: |
-          docker rm -f app || true
+          docker rm -f devops-ci || true
