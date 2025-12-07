@@ -16,18 +16,19 @@ Designed to demonstrate practical DevOps fundamentals in a clean, production-sty
 
 ---
 
-## Project Structure
+## 📁 Project Structure
+```
 devops-free-project/
-│── app/
-│ └── app.py # Flask application
-│── tests/
-│ └── test_app.py # pytest unit tests
-│── Dockerfile # Build & run the app in Docker
-│── requirements.txt
-│── .github/
-│ └── workflows/
-│ └── ci.yml # GitHub Actions CI pipeline
-└── README.md
+├── app/
+│   └── app.py            # Flask application
+├── tests/
+│   └── test_app.py       # Pytest unit tests
+├── Dockerfile            # Build & run the app in Docker
+├── requirements.txt
+└── .github/
+    └── workflows/
+        └── ci.yml        # GitHub Actions CI pipeline
+```
 
 ---
 
