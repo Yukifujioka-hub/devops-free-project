@@ -1,22 +1,51 @@
-![CI](https://https://github.com/Yukifujioka-hub/devops-free-project/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/Yukifujioka-hub/devops-free-project/actions/workflows/ci.yml/badge.svg)
 
-# DevOps Free Project — Flask + Docker + GitHub Actions (CI)
+# DevOps Free Project — Flask + Docker + GitHub Actions
 
-## Summary
-A minimal Flask API, containerized with Docker, with automated unit tests (pytest) and CI pipeline in GitHub Actions. This project demonstrates:
-- Containerization (Docker)
-- Automated testing (pytest)
-- CI workflow (GitHub Actions)
-- Local testing & container health-check
+A minimal DevOps demo project showcasing CI automation, containerization, and unit testing using a simple Flask API.
+Designed to demonstrate practical DevOps fundamentals in a clean, production-style structure.
 
-## What I built
-- Flask app: `app/app.py` (simple HTTP JSON/text response)
-- Tests: `tests/test_app.py` (pytest)
-- Dockerfile: builds an image that contains app and test dependencies
-- CI: `.github/workflows/ci.yml` runs pytest, builds docker image, starts container and health-checks
+---
 
-## How to run locally
-1. Clone
-   ```bash
-   git clone https://github.com/Yukifujioka-hub/devops-free-project.git
-   cd devops-free-project
+## Features
+- Flask API — small web endpoint for testing container behavior
+- Dockerized environment — reproducible runtime with dependencies included
+- Pytest unit tests — verifies application logic
+- GitHub Actions CI — automated testing, Docker build, and container health-check
+- Lightweight, easy-to-read structure suited for reviewing DevOps skills
+
+---
+
+## Project Structure
+devops-free-project/
+│── app/
+│ └── app.py # Flask application
+│── tests/
+│ └── test_app.py # pytest unit tests
+│── Dockerfile # Build & run the app in Docker
+│── requirements.txt
+│── .github/
+│ └── workflows/
+│ └── ci.yml # GitHub Actions CI pipeline
+└── README.md
+
+---
+
+## CI Pipeline Overview
+GitHub Actions workflow (`ci.yml`) automatically:
+
+1. Checks out code  
+2. Installs dependencies  
+3. Runs unit tests (`pytest`)  
+4. Builds Docker image  
+5. Starts the container  
+6. Performs a health-check to verify the app responds correctly
+
+This simulates a basic but realistic CI flow.
+---
+
+## Run Locally
+
+```bash
+git clone https://github.com/Yukifujioka-hub/devops-free-project.git
+cd devops-free-project
