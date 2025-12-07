@@ -18,5 +18,5 @@ A minimal Flask API, containerized with Docker, with automated unit tests (pytes
 ## How to run locally
 1. Clone
    ```bash
-   git clone https://github.com/<your-user>/<repo>.git
+   git clone https://github.com/Yukifujioka-hub/devops-free-project.git
    cd <repo>
