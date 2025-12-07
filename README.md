@@ -19,4 +19,4 @@ A minimal Flask API, containerized with Docker, with automated unit tests (pytes
 1. Clone
    ```bash
    git clone https://github.com/Yukifujioka-hub/devops-free-project.git
-   cd <repo>
+   cd devops-free-project
